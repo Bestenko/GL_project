@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <time.h>
 #include <stdlib.h>
 #include  <GL/glut.h>
@@ -36,6 +37,18 @@ public:
     {glRectf(s[i].x*Scale, s[i].y*Scale, (s[i].x+0.9)*Scale, (s[i].y+0.9)*Scale); }
  }
 
+
+void DrawField()
+  {
+   glColor3f(0.0,0.7,0.0);
+   glBegin(GL_LINES);
+    for (int i=0; i<w; i+=Scale) 
+      {glVertex2f(i,0); glVertex2f(i,h);}
+    for (int j=0; j<h; j+=Scale)  
+      {glVertex2f(0,j); glVertex2f(w,j);}
+    glEnd();
+}
+
  void Tick()
  {
     for (int i=num;i>0;--i)
@@ -51,27 +64,12 @@ public:
     if ((s[0].x==m[i].x) && (s[0].y==m[i].y)) 
       {num++; m[i].New();}
  
- if (s[0].x>N) s[0].x=0;  if (s[0].x<0) s[0].x=N;
-  if (s[0].y>M) s[0].y=0;  if (s[0].y<0) s[0].y=M;
+  if (s[0].x>N) dir=1;  if (s[0].x<0) dir=2;
+  if (s[0].y>M) dir=3;  if (s[0].y<0) dir=0;
  
  for (int i=1;i<num;i++)
   if (s[0].x==s[i].x && s[0].y==s[i].y)  num=i;
  }
- 
-
-
-void DrawField()
-  {
-   glColor3f(0.0,0.7,0.0);
-   glBegin(GL_LINES);
-    for (int i=0; i<w; i+=Scale) 
-      {glVertex2f(i,0); glVertex2f(i,h);}
-    for (int j=0; j<h; j+=Scale)  
-      {glVertex2f(0,j); glVertex2f(w,j);}
-    glEnd();
-}
-
-
 void display() {
 
      glClear(GL_COLOR_BUFFER_BIT);
@@ -91,10 +89,10 @@ void KeyboardEvent(int key, int a, int b)
 {   
     switch(key)
     {
-        case 101 : 	if(dir!=3)dir=0; break;
-         case 102:  if(dir!=1) dir=2; break;
-        case 100 :  if(dir!=2)dir=1; break;
-        case 103 :  if(dir!=0)dir=3; break;
+        case 101 : 	dir=0; break;
+         case 102:   dir=2; break;
+        case 100 :  dir=1; break;
+        case 103 :  dir=3; break;
      }
 }
 
@@ -113,11 +111,11 @@ int main(int argc, char **argv) {
 	
 	for (int i=0;i<10;i++)
 		m[i].New();
-	
+	{
 
 	 s[i].x=10;
 	 s[i].y=10;
-
+};
 glutInit(&argc, argv);
 glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB );
 glutInitWindowSize (w, h);
