@@ -122,7 +122,7 @@ glutInit(&argc, argv);
 glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB );
 glutInitWindowSize (w, h);
 glutCreateWindow ("Test"); 
-glClearColor(1.0,1.0,0.6,1.0);  //цвет фона
+glClearColor(1.0,1.0,0.6,1.0);  //колір фону 
 glMatrixMode(GL_PROJECTION);
 glLoadIdentity();
 gluOrtho2D(0,w,0,h);
