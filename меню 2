@@ -1,0 +1,115 @@
+#include "stdafx.h"
+#include <stdio.h>
+#include <conio.h>
+#include <iostream>
+#include <string.h>
+#include <windows.h>
+
+#include <time.h>
+#include <stdlib.h>
+#include  <glut.h>
+using namespace std;
+
+
+ 
+HANDLE H = GetStdHandle(STD_OUTPUT_HANDLE);
+ 
+class String
+{
+private:
+    char * string;
+public:
+    String() //По умолчанию.
+    {
+        string = new char[80];
+        Initialization();
+    }
+    ~String()
+    {
+        delete [] string;
+    }
+    void Initialization()
+    {
+        cout<<"Введіть ім'я: ";
+        cin>>string;
+            system("cls");
+            OemToAnsi(string,string);
+            ShowString();
+    }
+    void ShowString()
+    {
+        cout<<"Гравець: "<<string<<endl<<endl;
+    }
+    void Stand(int x, int y, int key, char*str)
+    {
+        CONSOLE_CURSOR_INFO ci; ci.bVisible=0; ci.dwSize=100; SetConsoleCursorInfo(H,&ci);
+        setlocale(LC_ALL,"UKR");
+        COORD c;
+        c.X = x; c.Y = y;
+        SetConsoleCursorPosition(H,c);
+        SetConsoleTextAttribute(H,key);
+        cout<<str<<"\n";
+    }
+};
+ 
+void main()
+{
+    system("title Snake");
+    setlocale (0, "");
+    String s;
+    s.Stand(0,2,10,"Почати гру");
+    s.Stand(0,4,2,"Статистика");
+    s.Stand(0,6,2,"Вихід");
+    int key; 
+    int punkt = 1;
+    while(1)
+    {
+        key = _getch();
+        if(key == 80)
+        {
+            if(punkt < 3)
+            {
+                punkt++;
+                if(punkt == 2)
+                {
+                    s.Stand(0,2,2,"Почати гру");
+                    s.Stand(0,4,10,"Статистика");
+                }
+                else if(punkt = 3)
+                {
+                    s.Stand(0,4,2,"Статистика");
+                    s.Stand(0,6,10,"Вихід");
+                }
+            }
+        }
+        else if(key == 72)
+        {
+            if(punkt > 1)
+            {
+                punkt--;
+                
+                if(punkt == 2)
+                {
+                    s.Stand(0,4,10,"Статистика");
+                    s.Stand(0,6,2,"Вихід");
+                }
+                else if(punkt == 1)
+                {
+                    s.Stand(0,2,10,"Почати гру");
+                    s.Stand(0,4,2,"Статистика");
+                }
+            }
+        }
+        else if(key == 13)
+        {
+            system("cls");
+            SetConsoleTextAttribute(H,12);
+            if(punkt == 1) cout<<"Параметры по умолчанию!\n\n";
+            else if(punkt == 2) cout<<"Статистика\n\n";
+            else if(punkt == 3) cout<<"Создать строку!\n\n";
+            _getch();
+            exit(0);
+        }
+    }
+ 
+}
