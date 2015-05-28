@@ -64,8 +64,8 @@ void DrawField()
     if ((s[0].x==m[i].x) && (s[0].y==m[i].y)) 
       {num++; m[i].New();}
  
-  if (s[0].x>N) dir=1;  if (s[0].x<0) dir=2;
-  if (s[0].y>M) dir=3;  if (s[0].y<0) dir=0;
+  - if (s[0].x>N) s[0].x=0;  if (s[0].x<0) s[0].x=N;
+-  if (s[0].y>M) s[0].y=0;  if (s[0].y<0) s[0].y=M;
  
  for (int i=1;i<num;i++)
   if (s[0].x==s[i].x && s[0].y==s[i].y)  num=i;
