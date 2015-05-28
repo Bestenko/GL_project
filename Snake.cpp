@@ -86,14 +86,14 @@ void display() {
 }
 
 void KeyboardEvent(int key, int a, int b)
-{   
-    switch(key)
-    {
-        case 101 : 	dir=0; break;
-         case 102:   dir=2; break;
-        case 100 :  dir=1; break;
-        case 103 :  dir=3; break;
-     }
+{
+switch(key)
+{
+case 101 : if(dir!=3)dir=0; break;
+case 102: if(dir!=1) dir=2; break;
+case 100 : if(dir!=2)dir=1; break;
+case 103 : if(dir!=0)dir=3; break;
+}
 }
 
 void timer(int = 0)
