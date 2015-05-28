@@ -25,14 +25,14 @@ public:
         y=rand() % M;   }
 	
     void DrawApple()
-   {   glColor3f(0.0,1.0,0.0);
+   {   glColor3f(0.0,1.0,0.0); //колір квадратиків які їсть змійка
        glRectf(x*Scale,y*Scale,(x+1)*Scale,(y+1)*Scale); }
 
 } m[10];
 
  void DrawSnake()
  {  
-  glColor3f(0.0,0.0,1.0);
+  glColor3f(0.0,0.0,1.0);//колір змійки
   for (int i=0;i<num;i++)
     {glRectf(s[i].x*Scale, s[i].y*Scale, (s[i].x+0.9)*Scale, (s[i].y+0.9)*Scale); }
  }
@@ -40,7 +40,7 @@ public:
 
 void DrawField()
   {
-   glColor3f(0.0,0.7,0.0);
+   glColor3f(0.0,0.7,0.0); //колір ліній рішки
    glBegin(GL_LINES);
     for (int i=0; i<w; i+=Scale) 
       {glVertex2f(i,0); glVertex2f(i,h);}
