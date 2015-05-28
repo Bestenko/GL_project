@@ -51,8 +51,8 @@ public:
     if ((s[0].x==m[i].x) && (s[0].y==m[i].y)) 
       {num++; m[i].New();}
  
-  if (s[0].x>N) dir=1;  if (s[0].x<0) dir=2;
-  if (s[0].y>M) dir=3;  if (s[0].y<0) dir=0;
+ if (s[0].x>N) s[0].x=0;  if (s[0].x<0) s[0].x=N;
+  if (s[0].y>M) s[0].y=0;  if (s[0].y<0) s[0].y=M;
  
  for (int i=1;i<num;i++)
   if (s[0].x==s[i].x && s[0].y==s[i].y)  num=i;
@@ -91,10 +91,10 @@ void KeyboardEvent(int key, int a, int b)
 {   
     switch(key)
     {
-        case 101 : 	dir=0; break;
-         case 102:   dir=2; break;
-        case 100 :  dir=1; break;
-        case 103 :  dir=3; break;
+        case 101 : 	if(dir!=3)dir=0; break;
+         case 102:  if(dir!=1) dir=2; break;
+        case 100 :  if(dir!=2)dir=1; break;
+        case 103 :  if(dir!=0)dir=3; break;
      }
 }
 
